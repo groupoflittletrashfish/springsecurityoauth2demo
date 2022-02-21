@@ -1,0 +1,23 @@
+server:
+  port: 8083
+  servlet:
+    session:
+      cookie:
+        #防止cookie冲突，冲突会导致登录验证不通过
+        name: OAUTH2-CLIENT-SESSIONID01
+# 授权服务器的地址，供下面的配置文件使用
+oauth2-server-url: http://localhost:8082
+# 与授权服务器对应的配置
+security:
+  oauth2:
+    client:
+      client-id: admin
+      client-secret: 112233
+      # 授权URI
+      user-authorization-uri: ${oauth2-server-url}/oauth/authorize
+      # 获取token的URI
+      access-token-uri: ${oauth2-server-url}/oauth/token
+    resource:
+      jwt:
+        # 获取jwt的URI
+        key-uri: ${oauth2-server-url}/oauth/token_key
